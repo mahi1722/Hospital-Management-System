@@ -1,4 +1,4 @@
-package main;
+package mainmod;
 
 import dao.HospitalServiceImpl;
 import entity.Appointment;
