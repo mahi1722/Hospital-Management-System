@@ -1,14 +1,10 @@
 package util;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class DBConnectionUtil {
-
     private static Connection connection = null;
 
     public static Connection getConnection() {
@@ -17,16 +13,14 @@ public class DBConnectionUtil {
         }
 
         try {
-            Properties props = new Properties();
-            FileInputStream fis = new FileInputStream("resources/db.properties");
-            props.load(fis);
+            // Get the connection string from PropertyUtil
+            String connectionString = DBPropertyUtil.getPropertyString();
+            String username = "root"; // Assuming username is constant
+            String password = "mahi";  // Assuming password is constant
 
-            String connectionString = props.getProperty("connectionString");
-            String username = props.getProperty("username");
-            String password = props.getProperty("password");
-
+            // Establish the connection
             connection = DriverManager.getConnection(connectionString, username, password);
-        } catch (IOException | SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 

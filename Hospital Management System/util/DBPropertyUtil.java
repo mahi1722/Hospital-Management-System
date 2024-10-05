@@ -5,14 +5,28 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class DBPropertyUtil {
-    public static String getPropertyString(String fileName) {
-        Properties prop = new Properties();
+
+    public static String getPropertyString() {
+        Properties props = new Properties();
+        String connectionString = null;
+
         try {
-            FileInputStream input = new FileInputStream(fileName);
-            prop.load(input);
+            FileInputStream fis = new FileInputStream("resources/db.properties");
+            props.load(fis);
+
+            // Read properties
+            String hostname = props.getProperty("hostname");
+            String dbname = props.getProperty("dbname");
+            String username = props.getProperty("username");
+            String password = props.getProperty("password");
+            String portnumber = props.getProperty("portnumber");
+
+            // Construct the connection string
+            connectionString = String.format("jdbc:mysql://%s:%s/%s", hostname, portnumber, dbname);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return prop.getProperty("connectionString");
+
+        return connectionString;
     }
 }
