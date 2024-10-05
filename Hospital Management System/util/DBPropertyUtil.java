@@ -11,7 +11,7 @@ public class DBPropertyUtil {
         String connectionString = null;
 
         try {
-            FileInputStream fis = new FileInputStream("resources/db.properties");
+            FileInputStream fis = new FileInputStream("D:/Hexaware/Java Coding Challenge/Hospital Management System/resources/db.properties");
             props.load(fis);
 
             // Read properties
